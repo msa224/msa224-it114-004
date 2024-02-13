@@ -1,13 +1,11 @@
 package M3NumberGuesser;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
-
 
 public class NumberGuesser4 {
     private int maxLevel = 1;
@@ -133,8 +131,21 @@ public class NumberGuesser4 {
             win();
             pickNewRandom = true;
         } else {
-            System.out.println("That's wrong");
-            strikes++;
+            
+        //msa224 2/12/24    
+            int difference = Math.abs(guess - number);
+        String hint = "";
+        if (difference >= 6) {
+            hint = "Cold";
+        } else if (difference >= 3) {
+            hint = "Warm";
+        } else {
+            hint = "Hot";
+        }
+        System.out.println("That's wrong! You're " + hint + ".");
+        strikes++;
+        //msa224 2/12/24
+
             if (strikes >= maxStrikes) {
                 lose();
                 pickNewRandom = true;
@@ -159,6 +170,15 @@ public class NumberGuesser4 {
         try (Scanner input = new Scanner(System.in);) {
             System.out.println("Welcome to NumberGuesser4.0");
             System.out.println("To exit, type the word 'quit'.");
+
+            //msa224 2/12/24
+            System.out.println("What's your name?");
+            String playerName = input.nextLine().trim();
+            fileName = playerName + ".txt";
+            //msa224 2/12/24
+            
+
+
             loadState();
             do {
                 if (pickNewRandom) {
@@ -194,5 +214,4 @@ public class NumberGuesser4 {
         NumberGuesser4 ng = new NumberGuesser4();
         ng.start();
     }
-}
 }
