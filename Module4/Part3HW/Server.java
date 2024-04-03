@@ -6,11 +6,13 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 public class Server {
     int port = 3001;
     // connected clients
     private List<ServerThread> clients = new ArrayList<ServerThread>();
+    private Random random = new Random();
 
     private void start(int port) {
         this.port = port;
@@ -67,16 +69,27 @@ public class Server {
         }
     }
 
-    private boolean processCommand(String message, long clientId){
+    private boolean processCommand(String message, long clientId) {
         System.out.println("Checking command: " + message);
-        if(message.equalsIgnoreCase("disconnect")){
+        if (message.toLowerCase().startsWith("/shufflewords ")) {
+            String[] parts = message.split(" ", 2);
+            if (parts.length == 2) {
+                String originalText = parts[1];
+                String shuffledNewMessage = shuffleMessage(originalText);
+                broadcast(String.format("User[%d]: %s", clientId, shuffledNewMessage), clientId);
+            }
+            return true;
+        } else if (message.equalsIgnoreCase("/cointoss")) {  //msa224 2/22/24
+            String result = executeCoinToss();
+            broadcast(String.format("User[%d] has asked for a coin toss and got %s", clientId, result), clientId);
+            return true;
+        } else if (message.equalsIgnoreCase("disconnect")) {
             Iterator<ServerThread> it = clients.iterator();
             while (it.hasNext()) {
                 ServerThread client = it.next();
-                if(client.getId() == clientId){
+                if (client.getId() == clientId) {
                     it.remove();
                     disconnect(client);
-                    
                     break;
                 }
             }
@@ -84,6 +97,24 @@ public class Server {
         }
         return false;
     }
+
+    private String shuffleMessage(String message) {
+        char[] characters = message.toCharArray();
+        for (int x = 0; x < characters.length; x++) {
+            int y = random.nextInt(characters.length);
+            char temp = characters[x];
+            characters[x] = characters[y];
+            characters[y] = temp;
+        }
+        return new String(characters);
+    }
+
+    private String executeCoinToss() { //msa224 2/22/24
+        int randomNum = (int) (Math.random() * 2);
+        return (randomNum == 0) ? "It's Heads!" : "It's Tails!";
+    }
+    
+   
     public static void main(String[] args) {
         System.out.println("Starting Server");
         Server server = new Server();
