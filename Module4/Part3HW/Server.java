@@ -71,7 +71,7 @@ public class Server {
 
     private boolean processCommand(String message, long clientId) {
         System.out.println("Checking command: " + message);
-        if (message.toLowerCase().startsWith("/shufflewords ")) {
+        if (message.toLowerCase().startsWith("/shufflewords ")) { //msa224 2/22/24
             String[] parts = message.split(" ", 2);
             if (parts.length == 2) {
                 String originalText = parts[1];
@@ -81,7 +81,7 @@ public class Server {
             return true;
         } else if (message.equalsIgnoreCase("/cointoss")) {  //msa224 2/22/24
             String result = executeCoinToss();
-            broadcast(String.format("User[%d] has asked for a coin toss and got %s", clientId, result), clientId);
+            broadcast(String.format("User[%d] initiated a coin toss and got %s", clientId, result), clientId);
             return true;
         } else if (message.equalsIgnoreCase("disconnect")) {
             Iterator<ServerThread> it = clients.iterator();
@@ -98,7 +98,7 @@ public class Server {
         return false;
     }
 
-    private String shuffleMessage(String message) {
+    private String shuffleMessage(String message) { //msa224 2/22/24
         char[] characters = message.toCharArray();
         for (int x = 0; x < characters.length; x++) {
             int y = random.nextInt(characters.length);
@@ -111,7 +111,7 @@ public class Server {
 
     private String executeCoinToss() { //msa224 2/22/24
         int randomNum = (int) (Math.random() * 2);
-        return (randomNum == 0) ? "It's Heads!" : "It's Tails!";
+        return (randomNum == 0) ? "You got Heads!" : "You got Tails!";
     }
     
    
