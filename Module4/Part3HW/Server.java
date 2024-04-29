@@ -40,11 +40,13 @@ public class Server {
         }
     }
     protected synchronized void disconnect(ServerThread client) {
-		long id = client.getId();
+		@SuppressWarnings("deprecation")
+        long id = client.getId();
         client.disconnect();
 		broadcast("Disconnected", id);
 	}
     
+    @SuppressWarnings("deprecation")
     protected synchronized void broadcast(String message, long id) {
         if(processCommand(message, id)){
 
@@ -69,6 +71,7 @@ public class Server {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private boolean processCommand(String message, long clientId) {
         System.out.println("Checking command: " + message);
         if (message.toLowerCase().startsWith("/shufflewords ")) { //msa224 2/22/24

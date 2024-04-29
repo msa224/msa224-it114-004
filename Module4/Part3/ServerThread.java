@@ -15,6 +15,7 @@ public class ServerThread extends Thread {
     private Server server;// ref to our server so we can call methods on it
     // more easily
 
+    @SuppressWarnings("deprecation")
     private void info(String message) {
         System.out.println(String.format("Thread[%s]: %s", getId(), message));
     }
@@ -47,6 +48,7 @@ public class ServerThread extends Thread {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void run() {
         info("Thread starting");
