@@ -17,6 +17,7 @@ public class ServerThread extends Thread {
     // more easily
     private Room currentRoom;
 
+    @SuppressWarnings("deprecation")
     private void info(String message) {
         System.out.println(String.format("Thread[%s]: %s", getId(), message));
     }
