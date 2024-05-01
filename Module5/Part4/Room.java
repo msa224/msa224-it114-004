@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import Project.Client.Client;
+
 public class Room {
 	private Server server;// used to refer to accessible server functions
 	private String name;
@@ -161,4 +163,24 @@ public class Room {
 		isRunning = false;
 		clients = null;
 	}
+
+    public static void disconnectClient(Client client, Client currentroom) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'disconnectClient'");
+    }
+
+    public static void joinRoom(String lobby, Client client) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'joinRoom'");
+    }
+
+    public static void createRoom(String message, Client client) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createRoom'");
+    }
+
+    public static List<String> listRooms(String searchString, int limit) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listRooms'");
+    }
 }
