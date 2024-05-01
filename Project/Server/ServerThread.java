@@ -33,7 +33,7 @@ public class ServerThread extends Thread {
         logger.info(String.format("Thread[%s]: %s", getClientName(), message));
     }
 
-    //msa224 4/30/24
+    //msa224 4/30/24 begins 
     public String processMessage(String message) {
         
         message = message.replaceAll("\\*(.*?)\\*", "<b>$1</b>");
@@ -45,7 +45,7 @@ public class ServerThread extends Thread {
         
         return message;
     }
-    //msa224 4/30/24
+    //msa224 4/30/24 ends
 
     public ServerThread(Socket myClient/* , Room room */) {
         info("Thread created");
