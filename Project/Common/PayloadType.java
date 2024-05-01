@@ -1,5 +1,6 @@
-package Project;
+package Project.Common;
 
 public enum PayloadType {
-    CONNECT, DISCONNECT, MESSAGE
+    CONNECT, DISCONNECT, MESSAGE, CREATE_ROOM, JOIN_ROOM, LIST_ROOMS, CLIENT_ID, SYNC_CLIENT, ROLL, FLIP
 }
+//msa224 4/30/24
