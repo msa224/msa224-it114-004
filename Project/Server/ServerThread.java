@@ -37,7 +37,7 @@ public class ServerThread extends Thread {
     public String processMessage(String message) {
         
         message = message.replaceAll("\\*(.*?)\\*", "<b>$1</b>");
-        message = message.replaceAll("_([^_]+)_", "<i>$1</i>");
+        message = message.replaceAll("\\*(.*?)\\", "<i>$1</i>");
         message = message.replaceAll("\\^r\\((.*?)\\)", "<span style='color:red'>$1</span>");
         message = message.replaceAll("\\^g\\((.*?)\\)", "<span style='color:green'>$1</span>");
         message = message.replaceAll("\\^b\\((.*?)\\)", "<span style='color:blue'>$1</span>");
